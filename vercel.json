@@ -1,0 +1,14 @@
+{
+  "rewrites": [
+    { "source": "/api/(.*)", "destination": "https://inventario-api.onrender.com/api/$1" },
+    { "source": "/((?!api/).*)", "destination": "/index.html" }
+  ],
+  "headers": [
+    {
+      "source": "/api/(.*)",
+      "headers": [
+        { "key": "Access-Control-Allow-Origin", "value": "*" }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,275 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  scroll-behavior: smooth;
+}
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #ccc; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #999; }
+
+/* ========== LAYOUT ========== */
+.app-layout {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.app-body {
+  display: flex;
+  flex: 1;
+  margin-top: 64px;
+  overflow: hidden;
+}
+
+.main-content {
+  flex: 1;
+  margin-left: 60px;
+  padding: 24px;
+  overflow-y: auto;
+  transition: margin-left 0.25s ease;
+  background: #f4f2ef;
+  min-height: calc(100vh - 64px);
+}
+
+/* ========== SIDEBAR ========== */
+.sidebar {
+  position: fixed;
+  top: 64px;
+  left: 0;
+  width: 60px;
+  height: calc(100vh - 64px);
+  background: #fff;
+  border-right: 1px solid #e8e5e0;
+  z-index: 900;
+  overflow: hidden;
+  transition: width 0.25s ease;
+  display: flex;
+  flex-direction: column;
+  padding: 8px 0;
+}
+
+.sidebar:hover {
+  width: 240px;
+  box-shadow: 2px 0 12px rgba(0,0,0,0.06);
+}
+
+.sidebar-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 14px;
+  height: 48px;
+  text-decoration: none;
+  color: #5a5550;
+  white-space: nowrap;
+  border-radius: 0 24px 24px 0;
+  margin-right: 12px;
+  transition: background 0.15s, color 0.15s;
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  font: var(--mat-sys-body-medium);
+  width: 100%;
+  text-align: left;
+}
+
+.sidebar-item:hover {
+  background: #fff3e0;
+  color: #e65100;
+}
+
+.sidebar-item.active-link {
+  background: #fff3e0;
+  color: #e65100;
+  font-weight: 500;
+}
+
+.sidebar-item .mat-icon {
+  flex-shrink: 0;
+  font-size: 22px;
+  width: 22px;
+  height: 22px;
+}
+
+.sidebar-item .label {
+  opacity: 0;
+  transition: opacity 0.15s ease 0.05s;
+}
+
+.sidebar:hover .sidebar-item .label {
+  opacity: 1;
+}
+
+.sidebar-section-title {
+  padding: 16px 18px 4px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: #a09890;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.sidebar-section-title .label {
+  opacity: 0;
+  transition: opacity 0.15s ease 0.05s;
+}
+
+.sidebar:hover .sidebar-section-title .label {
+  opacity: 1;
+}
+
+/* ========== HEADER ========== */
+.app-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 64px;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  background: #fff;
+  border-bottom: 1px solid #e8e5e0;
+  gap: 12px;
+}
+
+.app-header .brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 18px;
+  font-weight: 500;
+  color: #3e3a36;
+  white-space: nowrap;
+}
+
+.app-header .brand-icon {
+  color: #e65100;
+  font-size: 28px;
+  width: 28px;
+  height: 28px;
+}
+
+.app-header .spacer {
+  flex: 1;
+}
+
+.app-header .user-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.role-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  line-height: 22px;
+}
+
+.role-badge.role-ADMIN {
+  background: #ffebee;
+  color: #c62828;
+}
+
+.role-badge.role-CHEF {
+  background: #fff3e0;
+  color: #e65100;
+}
+
+.role-badge.role-MESERO {
+  background: #e3f2fd;
+  color: #1565c0;
+}
+
+/* ========== CARDS ========== */
+mat-card {
+  border-radius: 12px !important;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04) !important;
+  border: 1px solid #e8e5e0 !important;
+}
+
+mat-card-header {
+  padding-bottom: 4px;
+}
+
+/* ========== TABLES ========== */
+table.mat-table {
+  width: 100%;
+  background: transparent !important;
+}
+
+.mat-mdc-header-row {
+  background: #faf8f6 !important;
+}
+
+.mat-mdc-row {
+  transition: background 0.15s;
+}
+
+.mat-mdc-row:hover {
+  background: #faf8f6 !important;
+}
+
+/* ========== BUTTONS ========== */
+button.mat-raised-button[color=primary],
+button.mat-flat-button[color=primary] {
+  font-weight: 500;
+}
+
+/* ========== TOOLBAR ========== */
+.page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.page-header h1 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 400;
+  color: #3e3a36;
+}
+
+/* ========== FILTERS BAR ========== */
+.filters-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+/* ========== STATUS CHIPS ========== */
+.status-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.status-ENTRADA { background: #e8f5e9; color: #2e7d32; }
+.status-SALIDA  { background: #ffebee; color: #c62828; }
+.status-AJUSTE  { background: #fff3e0; color: #e65100; }
