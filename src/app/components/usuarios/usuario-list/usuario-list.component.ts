@@ -70,7 +70,7 @@ export class UsuarioListComponent implements OnInit {
   private dialog = inject(MatDialog);
 
   ngOnInit(): void {
-    this.svc.listar().subscribe();
+    this.svc.listar(true).subscribe();
   }
 
   desactivar(u: any): void {
@@ -82,7 +82,11 @@ export class UsuarioListComponent implements OnInit {
     });
     ref.afterClosed().subscribe(result => {
       if (result) {
-        this.svc.desactivar(u.id).subscribe();
+        this.svc.desactivar(u.id).subscribe({
+          next: () => {
+            this.svc.items.update(items => items.filter(item => item.id !== u.id));
+          },
+        });
       }
     });
   }

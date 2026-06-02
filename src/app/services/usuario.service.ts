@@ -13,10 +13,13 @@ export class UsuarioService {
   readonly items = signal<Usuario[]>([]);
   readonly loading = signal(false);
 
-  listar(): Observable<Usuario[]> {
+  listar(soloActivos: boolean = false): Observable<Usuario[]> {
     this.loading.set(true);
     return this.http.get<Usuario[]>(this.apiUrl).pipe(
-      tap(res => { this.items.set(res); this.loading.set(false); }),
+      tap(res => {
+        this.items.set(soloActivos ? res.filter(u => u.activo) : res);
+        this.loading.set(false);
+      }),
       catchError(err => {
         this.loading.set(false);
         return throwError(() => err);
@@ -41,8 +44,6 @@ export class UsuarioService {
   }
 
   desactivar(id: number): Observable<MensajeResponse> {
-    return this.http.patch<MensajeResponse>(`${this.apiUrl}/${id}/desactivar`, {}).pipe(
-      tap(() => this.listar().subscribe())
-    );
+    return this.http.patch<MensajeResponse>(`${this.apiUrl}/${id}/desactivar`, {});
   }
 }

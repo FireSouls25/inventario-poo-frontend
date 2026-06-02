@@ -116,6 +116,16 @@ html, body {
   color: #a09890;
   white-space: nowrap;
   overflow: hidden;
+  position: relative;
+}
+
+.sidebar-section-title::before {
+  content: '';
+  display: block;
+  width: 24px;
+  height: 1px;
+  background: #e0dcd7;
+  margin-bottom: 8px;
 }
 
 .sidebar-section-title .label {
